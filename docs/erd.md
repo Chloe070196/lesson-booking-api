@@ -7,11 +7,10 @@ erDiagram
   USER ||--o| TEACHER : "can have"
   USER ||--o| STUDENT : "can have"
 
-  TEACHER ||--o{ METHOD : "can have"
-  TEACHER ||--o{ LOCATION : "can have"
   METHOD ||--o{ QUALIFICATION : "can have"
   METHOD ||--o{ CLASS : "can have"
   CLASS ||--o{ LESSON : "can have"
+  EVENT ||--o| LESSON : "can have"
   LOCATION ||--o{ LESSON : "can have"
   LESSON ||--o{ BOOKING : "can have"
 
@@ -26,18 +25,11 @@ erDiagram
     string   username
     string   password  
     student  student        "optional"
-    student  studentId  FK  "optional"
-    teacher  teacher        "optional"
-    teacher  teacherId  FK  "optional"
-    datetime createdAt
     datatime updatedAt 
   }
   STUDENT  {
     number    id         PK
     user      user
-    integer   userId     FK
-    number    classId    FK "optional"
-    class     class         "optional"
     array     bookings
     array     wishlist
     array     questions
@@ -49,9 +41,6 @@ erDiagram
     string   shortAbout
     string   about
     user     user       
-    integer  userId     FK
-    integer  userId     FK
-    datetime createdAt
     datatime updatedAt
   }
   METHOD  {
@@ -71,8 +60,6 @@ erDiagram
     datatime updatedAt
   }
   LOCATION {
-    number  id      FK
-    enum    name
     string  country 
     string  city
     string  postalCode
@@ -84,36 +71,31 @@ erDiagram
     number   id         PK
     string   name
     array    students
-    number   methodId   FK
-    method   method
-    string   day
-    datetime time
+    string   equipment
+    string   level
     array    lessons
     datetime createdAt
     datatime updatedAt
   }
+  EVENT {
+    number   id         PK
+    enum     status 
+    datetime startTime
+    datetime endTime
+    datetime date
+  }
+
   LESSON  {
     number   id         PK
+    string   name
     array    bookings
-    number   classId    FK "optional"
-    class    class         "optional"
-    number   methodId   FK
-    datetime date
-    number   locationId FK
-    location location
-    method   method
-    string   level
-    string   material
     string   notes
+    boolean  cover
     datetime createdAt
     datatime updatedAt
   }
   BOOKING  {
     number   id        PK
-    number   studentId FK  "optional"
-    student  student       "optional"
-    number   lessonId  FK
-    boolean  guest
     datetime createdAt
     datatime updatedAt
   }
@@ -121,19 +103,12 @@ erDiagram
     number   id         PK
     string   content
     answer   answer
-    number   answerId   FK
-    method   method
-    number   methodId   FK
-    number   classId   FK
-    class    class
     datetime createdAt
     datatime updatedAt
   }
   ANSWER  {
     number   id         PK
     string   content
-    number   questionId FK
-    question question
     datetime createdAt
     datatime updatedAt
   }
