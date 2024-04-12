@@ -12,6 +12,11 @@
 
 ## student
 
+- as a student, so that I can use the website, I need to be able to...
+  - ... register
+  - ... login
+  - ... delete my account
+
 - as a student, so that I can attend a lesson, I need to be able to...
 
   - ... view the methods taught
