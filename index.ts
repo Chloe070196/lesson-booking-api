@@ -1,4 +1,6 @@
-const express = require('express')
+import { Request, Response } from "express"
+
+const express  = require('express')
 const app = express()
 const port = 3000
 const morgan = require('morgan')
@@ -25,6 +27,10 @@ dataSource.initialize()
     .catch((err: Error) => {
         console.error("Error during Data Source initialization", err)
     })
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Express + TypeScript Server');
+});
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
