@@ -1,12 +1,11 @@
-import { Request, Response } from "express"
-
-const express  = require('express')
+import express, { Request, Response } from "express"
+import morgan from 'morgan'
+import cors from 'cors'
+import dotenv from 'dotenv'
 const app = express()
 const port = 3000
-const morgan = require('morgan')
-const cors = require('cors')
 const { DataSource } = require("typeorm")
-require('dotenv').config()
+dotenv.config()
 
 app.use(morgan("dev"))
 app.use(cors())
