@@ -2,6 +2,7 @@
 
 ```mermaid
 
+
 erDiagram
 
   USER ||--o| TEACHER : "can have"
@@ -9,109 +10,101 @@ erDiagram
 
   METHOD ||--o{ QUALIFICATION : "can have"
   METHOD ||--o{ CLASS : "can have"
-  CLASS ||--o{ LESSON : "can have"
-  EVENT ||--o| LESSON : "can have"
+  METHOD ||..o{ QUESTION: "can have"
+  
+  CLASS |o--o{ LESSON : "can have"
+  CLASS ||..o{ QUESTION : "can have"
+  CLASS }o..o{ STUDENT : "can have"
+  
+  TIMESLOT ||--o| LESSON : "can have"
   LOCATION ||--o{ LESSON : "can have"
   LESSON ||--o{ BOOKING : "can have"
-
   STUDENT ||--o{ BOOKING : "can have"
-  STUDENT ||--o{ QUESTION : "can have"
-
   QUESTION ||--o| ANSWER : "can have"
-  
 
   USER {
     number   id         PK
     string   username
-    string   password  
-    student  student        "optional"
-    datatime updatedAt 
+    string   email
+    string   password
   }
   STUDENT  {
     number    id         PK
-    user      user
     array     bookings
     array     wishlist
-    array     questions
     datetime  createdAt
-    datatime  updatedAt
+    datetime  updatedAt
   }
   TEACHER  {
     number   id         PK
     string   shortAbout
     string   about
-    user     user       
-    datatime updatedAt
+    user     user
   }
   METHOD  {
     number   id         PK
-    string   name 
+    string   name
     string   description
     array    classes
     array    lessons
-    datetime createdAt
-    datatime updatedAt
   }
   QUALIFICATION  {
     number id PK
     string   name
     string   description
-    datetime createdAt
-    datatime updatedAt
+    datetime obtainedOn
+    string   issuedBy
+    string   notes
   }
   LOCATION {
-    string  country 
+    string  country
     string  city
     string  postalCode
     string  street
     string  notes
-    string  gettingThere
+    string  gettingThere 
   }
   CLASS  {
     number   id         PK
     string   name
-    array    students
     string   equipment
     string   level
-    array    lessons
-    datetime createdAt
-    datatime updatedAt
   }
-  EVENT {
+  TIMESLOT {
     number   id         PK
-    enum     status 
+    boolean  available
+    string   activity
     datetime startTime
     datetime endTime
-    datetime date
+    datetime date 
   }
-
   LESSON  {
     number   id         PK
     string   name
-    array    bookings
     string   notes
     boolean  cover
-    datetime createdAt
-    datatime updatedAt
   }
   BOOKING  {
     number   id        PK
-    datetime createdAt
-    datatime updatedAt
+    number   attendees
+    string   note
   }
   QUESTION  {
     number   id         PK
     string   content
-    answer   answer
-    datetime createdAt
-    datatime updatedAt
   }
   ANSWER  {
     number   id         PK
     string   content
-    datetime createdAt
-    datatime updatedAt
   }
 
-
 ```
+
+## Note
+
+Every single entity will also have the following properties:
+
+- `datetime createdAt`
+- `datetime updatedAt`
+
+For the sake of readability, they have been removed from the ERD.
