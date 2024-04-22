@@ -18,7 +18,6 @@ dataSource.initialize()
 .catch((err: Error) => {
   console.error("Error during Data Source initialization", err)
 })
-
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
 });

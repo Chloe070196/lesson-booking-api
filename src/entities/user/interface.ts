@@ -7,5 +7,6 @@ export interface UserInterface {
   teacherId?: number;
   createdAt: Date;
   updatedAt: Date;
-}
+  fromDb(user:UserInterface): UserInterface;
+  }
 
