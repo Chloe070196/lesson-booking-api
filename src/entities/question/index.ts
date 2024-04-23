@@ -1,12 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, Column } from "typeorm";
 import { ClassInterface } from "../class/interface";
 import { AnswerInterface } from "../answer/interface";
 import { MethodInterface } from "../method/interface";
+import { InstanceIdentification } from "../inherited_classes";
 
 @Entity()
-export class Question {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Question extends InstanceIdentification {
   @Column()
   content: string;
   @Column()
@@ -17,8 +16,4 @@ export class Question {
   method?: MethodInterface;
   @Column()
   class?: ClassInterface;
-  @Column()
-  createdAt: Date;
-  @Column()
-  updatedAt: Date;
 }

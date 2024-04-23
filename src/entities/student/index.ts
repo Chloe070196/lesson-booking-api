@@ -1,13 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Column } from "typeorm"
 import { UserInterface } from "../user/interface";
 import { BookingInterface } from "../booking/interface";
 import { LessonInterface } from "../lesson/interface";
 import { ClassInterface } from "../class/interface";
+import { InstanceIdentification } from "../inherited_classes";
 
 @Entity()
-export class Student {
-    @PrimaryGeneratedColumn()
-    id: number
+export class Student extends InstanceIdentification {
     @Column()
     userId: number;
     @Column()
@@ -18,8 +17,4 @@ export class Student {
     wishlist?: Array<LessonInterface>;
     @Column()
     classes?: Array<ClassInterface>;
-    @Column()
-    createdAt: Date;
-    @Column()
-    updatedAt: Date;
 }

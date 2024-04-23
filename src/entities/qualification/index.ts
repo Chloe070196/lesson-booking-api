@@ -1,10 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Column } from "typeorm"
 import { MethodInterface } from "../method/interface";
+import { InstanceIdentification } from "../inherited_classes";
 
 @Entity()
-export class Qualification {
-    @PrimaryGeneratedColumn()
-    id: number
+export class Qualification extends InstanceIdentification {
     @Column()
     name: string;
     @Column()
@@ -19,8 +18,4 @@ export class Qualification {
     methodId: number;
     @Column()
     method?: MethodInterface;
-    @Column()
-    createdAt: Date;
-    @Column()
-    updatedAt: Date;
 }

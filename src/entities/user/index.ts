@@ -1,9 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Column } from "typeorm"
+import { InstanceIdentification } from "../inherited_classes";
 
 @Entity()
-export class User {
-    @PrimaryGeneratedColumn()
-    id: number
+export class User extends InstanceIdentification {
     @Column()
     username: string;
     @Column()
@@ -14,8 +13,4 @@ export class User {
     studentId: string;
     @Column()
     teacherId: number;
-    @Column()
-    createdAt: Date;
-    @Column()
-    updatedAt: Date;
 }

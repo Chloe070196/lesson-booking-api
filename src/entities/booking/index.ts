@@ -1,25 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
-import { UserInterface } from "../user/interface";
-import { BookingInterface } from "../booking/interface";
+import { Entity, Column } from "typeorm"
 import { LessonInterface } from "../lesson/interface";
-import { ClassInterface } from "../class/interface";
+import { InstanceIdentification } from "../inherited_classes";
+import { StudentInterface } from "../student/interface";
 
 @Entity()
-export class Booking {
-    @PrimaryGeneratedColumn()
-    id: number
+export class Booking extends InstanceIdentification {
     @Column()
-    userId: number;
     @Column()
-    user: UserInterface;
+    attendees: number;
     @Column()
-    bookings?: Array<BookingInterface>;
+    note: string;
     @Column()
-    wishlist?: Array<LessonInterface>;
+    lessonId: number;
     @Column()
-    classes?: Array<ClassInterface>;
+    lesson?: LessonInterface;
     @Column()
-    createdAt: Date;
+    studentId: number;
     @Column()
-    updatedAt: Date;
+    student: StudentInterface;
 }

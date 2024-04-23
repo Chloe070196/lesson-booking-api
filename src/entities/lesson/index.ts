@@ -1,13 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Column } from "typeorm"
 import { BookingInterface } from "../booking/interface";
 import { ClassInterface } from "../class/interface";
 import { LocationInterface } from "../location/interface";
 import { TimeSlotInterface } from "../timeslot/interface";
+import { InstanceIdentification } from "../inherited_classes";
 
 @Entity()
-export class Lesson {
-    @PrimaryGeneratedColumn()
-    id: number
+export class Lesson extends InstanceIdentification {
     @Column()
     name: string;
     @Column()
@@ -28,8 +27,4 @@ export class Lesson {
     notes: string;
     @Column()
     cover: boolean;
-    @Column()
-    createdAt: Date;
-    @Column()
-    updatedAt: Date;
 }

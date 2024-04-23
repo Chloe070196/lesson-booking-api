@@ -1,10 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Column } from "typeorm"
 import { UserInterface } from "../user/interface";
+import { InstanceIdentification } from "../inherited_classes";
 
 @Entity()
-export class Student {
-    @PrimaryGeneratedColumn()
-    id: number
+export class Student extends InstanceIdentification {
     @Column()
     userId: number;
     @Column()
@@ -15,8 +14,4 @@ export class Student {
     aboutParagraphs: string[];
     @Column()
     portraitImgUrl: string;
-    @Column()
-    createdAt: Date;
-    @Column()
-    updatedAt: Date;
 }

@@ -1,10 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Column } from "typeorm"
 import { LessonInterface } from "../lesson/interface";
+import { InstanceIdentification } from "../inherited_classes";
 
 @Entity()
-export class TimeSlot {
-    @PrimaryGeneratedColumn()
-    id: number
+export class TimeSlot extends InstanceIdentification {
     @Column()
     activity?: string;
     @Column()
@@ -15,8 +14,4 @@ export class TimeSlot {
     lesson?: LessonInterface;
     @Column()
     startTime: Date;
-    @Column()
-    endTime: Date;
-    @Column()
-    date: Date;
 }
