@@ -1,19 +1,20 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { UserInterface } from "../user/interface";
 
 @Entity()
-export class User {
+export class Student {
     @PrimaryGeneratedColumn()
     id: number
     @Column()
-    username: string;
+    userId: number;
     @Column()
-    email: string;
+    user: UserInterface;
     @Column()
-    password: string;
+    intro: string;
     @Column()
-    studentId: string;
+    aboutParagraphs: string[];
     @Column()
-    teacherId: number;
+    portraitImgUrl: string;
     @Column()
     createdAt: Date;
     @Column()

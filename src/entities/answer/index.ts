@@ -1,19 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { QuestionInterface } from "../question/interface";
 
 @Entity()
-export class User {
+export class Answer {
     @PrimaryGeneratedColumn()
     id: number
     @Column()
-    username: string;
+    questionId: number;
     @Column()
-    email: string;
+    question?: QuestionInterface;
     @Column()
-    password: string;
-    @Column()
-    studentId: string;
-    @Column()
-    teacherId: number;
+    content: string;
     @Column()
     createdAt: Date;
     @Column()

@@ -1,3 +1,5 @@
+import { DataSource } from "typeorm";
+
 export interface UserInterface {
   id: number;
   username: string;
@@ -7,6 +9,5 @@ export interface UserInterface {
   teacherId?: number;
   createdAt: Date;
   updatedAt: Date;
-  fromDb(user:UserInterface): UserInterface;
-  }
-
+  dataSource: DataSource;
+}

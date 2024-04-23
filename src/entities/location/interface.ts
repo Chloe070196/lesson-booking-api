@@ -1,6 +1,7 @@
 import { LessonInterface } from "../lesson/interface";
 
 export interface LocationInterface {
+  id: number;
   country: string;
   city: string;
   postalCode: string;
