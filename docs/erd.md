@@ -37,7 +37,9 @@ erDiagram
   }
   TEACHER  {
     number   id         PK
-    string   shortAbout
+    string   intro
+    array    aboutParagraphs
+    string   portraitImgUrl
     string   about
     user     user
   }
