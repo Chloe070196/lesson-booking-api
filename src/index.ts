@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { dataSource } from './src/utils/dataSource.js'
+import { dataSource } from './dataSource.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
