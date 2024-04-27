@@ -8,12 +8,14 @@ export class InputValidation {
 
   findInvalidField(requestBody: object) {
     const dataFieldNameArr = Object.keys(requestBody);
+    let searchResult = undefined
     dataFieldNameArr.forEach((dataFieldName) => {
-      if (!this.validateInputField(dataFieldName)) {
-        return dataFieldName;
+      if (!this.validateInputField(requestBody[dataFieldName])) {
+        console.log("found")
+        searchResult = dataFieldName;
       }
     });
-    return undefined;
+    return searchResult;
   }
 
   validateDataInput(req: Request, res: Response, next: NextFunction) {
