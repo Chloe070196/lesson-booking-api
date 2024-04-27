@@ -11,7 +11,6 @@ export class InputValidation {
     let searchResult = undefined
     dataFieldNameArr.forEach((dataFieldName) => {
       if (!this.validateInputField(requestBody[dataFieldName])) {
-        console.log("found")
         searchResult = dataFieldName;
       }
     });
