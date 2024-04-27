@@ -1,5 +1,5 @@
-import { expect, test } from "@jest/globals";
-import { InputValidation } from "../src/middlewares/input_validation";
+import { expect, jest, test } from "@jest/globals";
+import { InputValidation } from "../../src/middlewares/input_validation";
 
 describe("input validation: ", () => {
   const inputValidation = new InputValidation();
