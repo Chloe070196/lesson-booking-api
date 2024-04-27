@@ -5,7 +5,7 @@
    "main": "index.js",
    "type": "module",
    "scripts": {
-      "test": "jest --watch",
+      "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
       "start": "ts-node src/index.ts",
       "start:dev": "nodemon --exec npx --loader ts-node-esm src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs"
@@ -36,5 +36,14 @@
       "ts-jest": "^29.1.2",
       "ts-node": "10.9.1",
       "typescript": "4.5.2"
-   }
+   },
+   "jest": {
+      "moduleFileExtensions": ["ts", "js", "mjs"],
+      "transformIgnorePatterns": ["node_modules/(?!@babel/runtime)/"],
+      "transform": {
+        "^.+\\.(ts)$": "ts-jest",
+        "^.+\\.(js)$": "babel-jest",
+        "^.+\\.(mjs)$": "babel-jest"
+      }
+    }
 }
