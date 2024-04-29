@@ -6,8 +6,11 @@ import cors from "cors";
 app.use(morgan("dev"));
 app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World");
+//TODO: add routes here
+
+// deals with any attempt to access an non-existent route
+app.get("/*", (req: Request, res: Response) => {
+  res.status(404).json({ status: "fail", message: "not found" });
 });
 
 export { app };
