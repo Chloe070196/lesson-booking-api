@@ -2,7 +2,7 @@ import { Entity, Column } from "typeorm"
 import { LessonInterface } from "../lesson/interface";
 import { ClassInterface } from "../class/interface";
 import { QualificationInterface } from "../qualification/interface";
-import { InstanceIdentification } from "../inherited_classes";
+import { InstanceIdentification } from "../inherited_classes.ts";
 
 @Entity()
 export class Method extends InstanceIdentification {

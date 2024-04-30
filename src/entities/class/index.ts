@@ -1,6 +1,6 @@
 import { Entity, Column } from "typeorm";
 import { LessonInterface } from "../lesson/interface";
-import { InstanceIdentification } from "../inherited_classes";
+import { InstanceIdentification } from "../inherited_classes.ts";
 import { StudentInterface } from "../student/interface";
 import { MethodInterface } from "../method/interface";
 

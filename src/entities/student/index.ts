@@ -3,7 +3,7 @@ import { UserInterface } from "../user/interface";
 import { BookingInterface } from "../booking/interface";
 import { LessonInterface } from "../lesson/interface";
 import { ClassInterface } from "../class/interface";
-import { InstanceIdentification } from "../inherited_classes";
+import { InstanceIdentification } from "../inherited_classes.ts";
 
 @Entity()
 export class Student extends InstanceIdentification {

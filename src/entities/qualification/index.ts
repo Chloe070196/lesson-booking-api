@@ -1,6 +1,6 @@
 import { Entity, Column } from "typeorm"
 import { MethodInterface } from "../method/interface";
-import { InstanceIdentification } from "../inherited_classes";
+import { InstanceIdentification } from "../inherited_classes.ts";
 
 @Entity()
 export class Qualification extends InstanceIdentification {

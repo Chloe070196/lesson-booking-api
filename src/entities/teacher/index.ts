@@ -1,9 +1,9 @@
 import { Entity, Column } from "typeorm"
 import { UserInterface } from "../user/interface";
-import { InstanceIdentification } from "../inherited_classes";
+import { InstanceIdentification } from "../inherited_classes.ts";
 
 @Entity()
-export class Student extends InstanceIdentification {
+export class Teacher extends InstanceIdentification {
     @Column()
     userId: number;
     @Column()
