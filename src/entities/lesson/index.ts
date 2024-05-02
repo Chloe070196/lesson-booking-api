@@ -1,9 +1,9 @@
-import { Entity, Column } from "typeorm"
-import { BookingInterface } from "../booking/interface";
-import { ClassInterface } from "../class/interface";
-import { LocationInterface } from "../location/interface";
-import { TimeSlotInterface } from "../timeslot/interface";
+import { Entity, Column, OneToOne, JoinTable, ManyToMany } from "typeorm"
 import { InstanceIdentification } from "../inherited_classes.ts";
+import { TimeSlot } from "../timeslot/index.ts";
+import { Booking } from "../booking/index.ts";
+import { Class } from "../class/index.ts";
+import { Location } from "../location/index.ts";
 
 @Entity()
 export class Lesson extends InstanceIdentification {
@@ -11,20 +11,20 @@ export class Lesson extends InstanceIdentification {
     name: string;
     @Column()
     timeSlotId: number;
-    @Column()
-    timeSlot: TimeSlotInterface;
-    @Column()
-    bookings: Array<BookingInterface>;
-    @Column()
-    classId?: number; 
-    @Column()
-    class?: ClassInterface; 
-    @Column()
-    locationId: number;
-    @Column()
-    location: LocationInterface;
-    @Column()
-    notes: string;
+    @Column({nullable: true})
+    notes?: string;
     @Column()
     cover: boolean;
+    @OneToOne(() => TimeSlot)
+    @JoinTable()
+    timeSlot: TimeSlot;
+    @ManyToMany(() => Booking)
+    @JoinTable()
+    bookings: Booking[];
+    @OneToOne(() => Class)
+    @JoinTable()
+    class?: Class; 
+    @OneToOne(() => Location)
+    @JoinTable()
+    location?: Location;
 }

@@ -1,6 +1,6 @@
-import { Entity, Column } from "typeorm"
-import { MethodInterface } from "../method/interface";
+import { Entity, Column, ManyToOne, JoinTable } from "typeorm"
 import { InstanceIdentification } from "../inherited_classes.ts";
+import { Method } from "../method/index.ts";
 
 @Entity()
 export class Qualification extends InstanceIdentification {
@@ -12,10 +12,9 @@ export class Qualification extends InstanceIdentification {
     obtainedOn: Date;
     @Column()
     issuedBy: string;
-    @Column()
-    notes: string;
-    @Column()
-    methodId: number;
-    @Column()
-    method?: MethodInterface;
+    @Column({nullable: true})
+    notes?: string;
+    @ManyToOne(() => Method)
+    @JoinTable()
+    method?: Method;
 }

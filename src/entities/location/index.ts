@@ -1,6 +1,7 @@
-import { Entity, Column } from "typeorm"
+import { Entity, Column, OneToOne, JoinTable, LessThan } from "typeorm"
 import { LessonInterface } from "../lesson/interface";
 import { InstanceIdentification } from "../inherited_classes.ts";
+import { Lesson } from "../lesson/index.ts";
 
 @Entity()
 export class Location extends InstanceIdentification {
@@ -12,12 +13,11 @@ export class Location extends InstanceIdentification {
     postalCode: string;
     @Column()
     street: string;
-    @Column()
-    notes: string;
-    @Column()
-    lesson?: LessonInterface;
-    @Column()
-    lessonId?: number;
-    @Column()
-    gettingThere: string;
+    @Column({nullable: true})
+    notes?: string;
+    @Column({nullable: true})
+    gettingThere?: string;
+    @OneToOne(() => Lesson)
+    @JoinTable()
+    lesson?: Lesson;
 }

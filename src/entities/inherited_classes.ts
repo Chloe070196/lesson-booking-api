@@ -1,10 +1,10 @@
-import { PrimaryGeneratedColumn, Column } from "typeorm"
+import { PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn } from "typeorm"
 
 export abstract class InstanceIdentification {
     @PrimaryGeneratedColumn()
     id: number
-    @Column()
+    @CreateDateColumn()
     createdAt: Date;
-    @Column()
+    @UpdateDateColumn()
     updatedAt: Date;
 }

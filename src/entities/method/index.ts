@@ -1,8 +1,8 @@
-import { Entity, Column } from "typeorm"
-import { LessonInterface } from "../lesson/interface";
-import { ClassInterface } from "../class/interface";
-import { QualificationInterface } from "../qualification/interface";
+import { Entity, Column, ManyToMany, JoinTable } from "typeorm"
 import { InstanceIdentification } from "../inherited_classes.ts";
+import { Class } from "../class/index.ts";
+import { Lesson } from "../lesson/index.ts";
+import { Qualification } from "../qualification/index.ts";
 
 @Entity()
 export class Method extends InstanceIdentification {
@@ -10,10 +10,13 @@ export class Method extends InstanceIdentification {
     name: string;   
     @Column()
     description: string;   
-    @Column()
-    classes?: Array<ClassInterface>;    
-    @Column()
-    lessons?: Array<LessonInterface>;   
-    @Column()
-    qualifications?: Array<QualificationInterface>; 
+    @ManyToMany(() => Class)
+    @JoinTable()
+    classes?: Class[];    
+    @ManyToMany(() => Lesson)
+    @JoinTable()
+    lessons?: Lesson;   
+    @ManyToMany(() => Qualification)
+    @JoinTable()
+    qualifications?: Qualification[]; 
 }

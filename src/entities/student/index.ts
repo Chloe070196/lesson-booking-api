@@ -11,10 +11,10 @@ export class Student extends InstanceIdentification {
     userId: number;
     @Column()
     user: UserInterface;
-    @Column()
+    @Column({array: true})
     bookings?: Array<BookingInterface>;
-    @Column()
+    @Column({array: true})
     wishlist?: Array<LessonInterface>;
-    @Column()
+    @Column({array: true})
     classes?: Array<ClassInterface>;
 }

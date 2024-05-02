@@ -1,13 +1,14 @@
-import { Entity, Column } from "typeorm"
-import { QuestionInterface } from "../question/interface";
+import { Entity, Column, OneToOne, JoinColumn } from "typeorm"
 import { InstanceIdentification } from "../inherited_classes.ts";
+import { Question } from "../question/index.ts";
 
 @Entity()
 export class Answer extends InstanceIdentification {
     @Column()
     questionId: number;
     @Column()
-    question?: QuestionInterface;
-    @Column()
     content: string;
+    @OneToOne(() => Question)
+    @JoinColumn()
+    question: Question;
 }
