@@ -5,12 +5,12 @@ import { InstanceIdentification } from "../inherited_classes.ts";
 export class User extends InstanceIdentification {
     @Column()
     username: string;
-    @Column()
+    @Column({unique: true})
     email: string;
     @Column()
     password: string;
-    @Column()
+    @Column({nullable: true})
     studentId: string;
-    @Column()
+    @Column({nullable: true})
     teacherId: number;
 }
