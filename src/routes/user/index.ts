@@ -1,6 +1,6 @@
 import express from "express";
 import { UserController } from "../../controllers/user/index.ts";
-import { UserService } from "../../services/UserService.ts";
+import { UserService } from "../../services/user/index.ts";
 import { InputValidation } from "../../middlewares/input_validation.ts";
 import { UserRepository } from "../../repositories/user/index.ts";
 import { dataSource } from "../../dataSource.ts";
