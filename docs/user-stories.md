@@ -9,7 +9,6 @@
     - send a summary of my booking to my email address if I request it
     - get a response from the teacher if I use the contact form
     - and nothing else.
-  - know that my email address will only be stored in an encrypted format
   - register
   - login
   - delete my account
@@ -28,6 +27,7 @@
 
 - as a student, so that I can attend a lesson, I need to be able to...
 
+  - know if there is a last-minute change
   - view the methods taught
   - view the classes that exist
   - view the lessons in the calendar
