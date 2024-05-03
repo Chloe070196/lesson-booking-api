@@ -27,7 +27,6 @@ describe("crud repository methods: ", () => {
         mockUserOne,
         "User"
       );
-      console.log(result)
       expect(result).not.toBeNull();
       expect(result).not.toBeUndefined();
       expect(result.identifiers[0]).toHaveProperty("id");
