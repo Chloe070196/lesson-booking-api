@@ -16,12 +16,13 @@ export class CrudRepository<T> {
   }
 
   async create(values: QueryDeepPartialEntity<T>, entity: EntityTarget<T>) {
+    const columnList = this.helpers.getEntityColumnNameList(entity)
     return await this.dataSource
       .createQueryBuilder()
       .insert()
       .into(entity)
       .values(values)
-      .returning(["id", "username"])
+      .returning(columnList)
       .execute();
   }
 

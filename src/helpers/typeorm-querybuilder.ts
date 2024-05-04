@@ -1,5 +1,6 @@
 import { EntityTarget } from "typeorm";
 import { isNotStringType } from "../utils/checkDataType.ts";
+import { dataSource } from "../dataSource.ts";
 
 export class CrudRepositoryHelpers<T> {
   buildIntoAlias(entity: EntityTarget<T>) {
@@ -14,4 +15,13 @@ export class CrudRepositoryHelpers<T> {
     const conditionKey = Object.keys(condition)[0].toLowerCase();
     return alias + "." + conditionKey + " = :" + conditionKey;
   }
+
+  getEntityColumnNameList(entity: EntityTarget<T>) {
+    if (isNotStringType(entity)) {
+      const columnMetadataList = dataSource.getMetadata(entity.name).columns
+      const columnNameList: string[] = Object.keys(columnMetadataList[0].entityMetadata.propertiesMap)    
+      return columnNameList
+    } 
+  }
+
 }
