@@ -14,6 +14,10 @@ export class UserController {
             return
         }
         const newUser = await this.userService.register(req.body)
-        sendDataResponse(res, 201, newUser)
+        if (!newUser) {
+            throw new Error ('error registering user')
+          }
+        const cleanUser = this.userService.removeSensitiveInfo(newUser.generatedMaps[0], ['password', 'email'])
+        sendDataResponse(res, 201, cleanUser)
     }
 }
