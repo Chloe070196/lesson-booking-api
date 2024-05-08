@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, JoinTable, ManyToMany } from "typeorm"
+import { Entity, Column, OneToOne, JoinTable, ManyToMany, ManyToOne } from "typeorm"
 import { InstanceIdentification } from "../inherited_classes.ts";
 import { TimeSlot } from "../timeslot/index.ts";
 import { Booking } from "../booking/index.ts";
@@ -9,20 +9,15 @@ import { Location } from "../location/index.ts";
 export class Lesson extends InstanceIdentification {
     @Column()
     name: string;
-    @Column()
-    timeSlotId: number;
     @Column({nullable: true})
     notes?: string;
     @Column()
     cover: boolean;
     @OneToOne(() => TimeSlot)
-    @JoinTable()
     timeSlot: TimeSlot;
-    @ManyToMany(() => Booking)
-    @JoinTable()
+    @ManyToOne(() => Booking)
     bookings: Booking[];
-    @OneToOne(() => Class)
-    @JoinTable()
+    @ManyToOne(() => Class)
     class?: Class; 
     @OneToOne(() => Location)
     @JoinTable()

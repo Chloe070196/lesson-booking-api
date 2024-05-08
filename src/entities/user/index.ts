@@ -1,5 +1,16 @@
-import { Entity, Column } from "typeorm"
+import { Entity, Column, OneToOne, JoinColumn } from "typeorm"
 import { InstanceIdentification } from "../inherited_classes.ts";
+import { Student } from "../student/index.ts";
+import { Teacher } from "../teacher/index.ts";
+
+// the teacher is the sole admin, and this will be their personal website.
+// their unique role exists so that they can update their personal information
+// and also access CRUD methods on lessons, classes, methods, etc.
+// which only they will be able to use
+export enum UserRole {
+    ADMIN = "teacher",
+    STUDENT = "student",
+}
 
 @Entity()
 export class User extends InstanceIdentification {
@@ -9,8 +20,10 @@ export class User extends InstanceIdentification {
     email: string;
     @Column()
     password: string;
-    @Column({nullable: true})
-    studentId: string;
-    @Column({nullable: true})
-    teacherId: number;
+    @OneToOne(() => Student, { nullable: true })
+    @JoinColumn()
+    student: Student;
+    @OneToOne(() => Teacher, { nullable: true })
+    @JoinColumn()
+    teacher: Teacher;
 }

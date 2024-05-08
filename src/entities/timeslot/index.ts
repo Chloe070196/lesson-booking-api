@@ -1,4 +1,4 @@
-import { Entity, Column } from "typeorm"
+import { Entity, Column, OneToOne, JoinTable } from "typeorm"
 import { InstanceIdentification } from "../inherited_classes.ts";
 import { Lesson } from "../lesson/index.ts";
 
@@ -10,7 +10,8 @@ export class TimeSlot extends InstanceIdentification {
     available: boolean;
     @Column({nullable: true})
     lessonId?: number;
-    @Column({nullable: true})
+    @OneToOne(() => Lesson, {nullable: true})
+    @JoinTable()
     lesson?: Lesson;
     @Column()
     startTime: Date;

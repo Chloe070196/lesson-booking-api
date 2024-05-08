@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, JoinColumn } from "typeorm"
+import { Entity, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm"
 import { LessonInterface } from "../lesson/interface";
 import { InstanceIdentification } from "../inherited_classes.ts";
 import { StudentInterface } from "../student/interface";
@@ -14,7 +14,7 @@ export class Booking extends InstanceIdentification {
     @OneToOne(() => Lesson)
     @JoinColumn()
     lesson: Lesson;
-    @OneToOne(() => Student)
+    @ManyToOne(() => Student)
     @JoinColumn()
     student: Student;
 }

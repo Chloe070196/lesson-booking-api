@@ -1,20 +1,19 @@
-import { Entity, Column } from "typeorm"
-import { UserInterface } from "../user/interface";
+import { Entity, Column, OneToMany, JoinColumn, ManyToMany, OneToOne } from "typeorm"
 import { BookingInterface } from "../booking/interface";
 import { LessonInterface } from "../lesson/interface";
 import { ClassInterface } from "../class/interface";
 import { InstanceIdentification } from "../inherited_classes.ts";
+import { Booking } from "../booking/index.ts";
+import { Lesson } from "../lesson/index.ts";
+import { Class } from "../class/index.ts";
 
 @Entity()
 export class Student extends InstanceIdentification {
-    @Column()
-    userId: number;
-    @Column()
-    user: UserInterface;
-    @Column({array: true})
+    @OneToMany(() => Booking, () => Student)
     bookings?: Array<BookingInterface>;
-    @Column({array: true})
+    @OneToMany(() => Lesson, () => Student)
     wishlist?: Array<LessonInterface>;
-    @Column({array: true})
+    @ManyToMany(() => Class, () => Student)
+    @JoinColumn()
     classes?: Array<ClassInterface>;
 }
