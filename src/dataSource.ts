@@ -21,8 +21,9 @@ const dataSource = new DataSource({
     url: process.env.POSTGRES_URL,
     host: process.env.POSTGRES_HOST,
     password: process.env.POSTGRES_PASSWORD,
-    entities: [User],
+    // entities: [User],
     // entities: [User, TimeSlot, Teacher, Student, Question, Qualification, Method, Location, Lesson, Class, Booking, Answer],
+    entities: [User, TimeSlot, Teacher, Student, Question, Qualification, Method, Location, Lesson, Class, Booking, Answer],
     synchronize: true,
 })
 
