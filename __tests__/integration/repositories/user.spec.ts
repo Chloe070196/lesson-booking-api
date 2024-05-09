@@ -5,7 +5,7 @@ import { dataSource } from "../../../src/dataSource.ts";
 import { CrudRepositoryHelpers } from "../../../src/helpers/typeorm-querybuilder.ts";
 import { UserRepository } from "../../../src/repositories/user/index.ts";
 
-describe("crud repository methods: ", () => {
+describe("user repository methods: ", () => {
   const helpers = new CrudRepositoryHelpers();
   const repository = new UserRepository(dataSource, helpers);
 
@@ -18,7 +18,7 @@ describe("crud repository methods: ", () => {
   // all we are concerned with here is to check that UserRepository
   // extends CrudRepository properly. The tests only ascertain that
   // the request goes through as expected.
-  test("this.crudRepository.create(value, entity) inserts a new instance of an entity in the db and returns it", async () => {
+  test("this.userRepository.create(value, entity) inserts a new instance of a user in the db and returns it", async () => {
     await dataSource.initialize();
     const result: ObjectLiteral = await repository.post(mockUserOne);
     expect(result).not.toBeNull();
@@ -28,7 +28,7 @@ describe("crud repository methods: ", () => {
     // TODO: add a delete method so that this test can be run multiple times
     // without the repetition changing its outcome
   }, 20000);
-  test("this.crudRepository.read(condition, entity) returns the value of the entity instance matching the condition passed to it", async() => {
+  test("this.userRepository.read(condition, entity) returns the value of the user instance matching the condition passed to it", async() => {
     const result: void | ObjectLiteral = await repository.getUserBy({
       username: "Lee",
     });
