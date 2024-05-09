@@ -1,0 +1,114 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Lesson Booking API",
+    "description": "an api that will handle the CRUD requests for a lesson booking website",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local host / development"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "user-input-schema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+						"example": "example@email.com"
+          },
+          "username": {
+            "type": "string",
+						"example": "dragonfly84"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "user-output-schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": 51
+              },
+              "username": {
+                "type": "string",
+                "example": "dragonfly84"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": " ISO 8601",
+                "example": "2024-05-09T10:05:11.388Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": " ISO 8601",
+                "example": "2024-05-09T10:10:11.388Z"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/users/register": {
+      "post": {
+        "summary": "If no matching user is found, creates a user in the db",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user-input-schema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "user successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user-output-schema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "user already exists - registration failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "email already in use"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
