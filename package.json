@@ -6,6 +6,10 @@
    "type": "module",
    "scripts": {
       "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+      "test:unit": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch --testPathPattern=__tests__/unit",
+      "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch --testPathPattern=__tests__/integration",
+      "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch --testPathPattern=__tests__/e2e",
+      "test:specific": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch --rootDir=__tests__ --testPathPattern=$1",
       "start": "ts-node src/index.ts",
       "start:dev": "nodemon --exec npx --loader ts-node-esm src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs"
