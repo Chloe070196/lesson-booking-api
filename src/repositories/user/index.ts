@@ -1,6 +1,6 @@
 import { DataSource, ObjectLiteral } from "typeorm";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
-import { User } from "../../entities/user/index.js";
+import { User } from "../../entities/user/index.ts";
 import { CrudRepository } from "../crud-repository/index.ts";
 import { CrudRepositoryHelpers } from "../../helpers/typeorm-querybuilder.ts";
 

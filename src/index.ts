@@ -1,5 +1,5 @@
-import { dataSource } from './dataSource.js'
-import { app } from './server.js';
+import { dataSource } from './dataSource.ts'
+import { app } from './server.ts';
 import dotenv from 'dotenv'
 dotenv.config()
 
