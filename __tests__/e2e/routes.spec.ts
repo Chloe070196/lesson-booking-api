@@ -2,10 +2,12 @@ import mockClient from "supertest";
 import TestUtils from "../utils.ts";
 
 describe("/register : POST", () => {
+  
   beforeAll(async () => {
     new TestUtils()
     await TestUtils.initializeApp()
   })
+
   test(" if the user is new, saves their details into the database and return a success (201) response containing their id and username in its data object", async () => {
     const mockUser = {
       password: process.env.TEST_USER_THREE_PASSWORD,
@@ -21,6 +23,7 @@ describe("/register : POST", () => {
     expect(response.body.data).toHaveProperty("id");
     expect(response.body.data.username).toEqual("Danny1234");
   });
+
   test(" if the user not new, sends a 400 error message", async () => {
     const mockUser = {
       password: process.env.TEST_USER_THREE_PASSWORD,
