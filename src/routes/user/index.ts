@@ -17,5 +17,10 @@ userRouter.post(
   InputValidation.validateDataInput,
   controller.register
 );
+userRouter.post(
+  "/login",
+  InputValidation.validateDataInput,
+  controller.login
+);
 
 export { userRouter };
