@@ -58,5 +58,23 @@ describe("user/", () => {
       expect(response.body).toHaveProperty("data");
       expect(response.body.data).toHaveProperty("token");
     });
+
+    test(" if the credentials do not match, sends a generic error message", async () => {
+      const mockUser = {
+        password: process.env.TEST_USER_THREE_PASSWORD,
+        email: process.env.TEST_USER_TWO_EMAIL,
+      };
+      const response = await mockClient(TestUtils.app)
+        .post("/user/login")
+        .send(mockUser);
+
+        expect(response.status).toEqual(401);
+        expect(response.body).toHaveProperty("message");
+        expect(response.body.message).toEqual(
+          "Incorrect email or password"
+        );
+        expect(response.body).toHaveProperty("status");
+        expect(response.body.status).toEqual("fail");
+    });
   });
 });
