@@ -12,20 +12,13 @@ export class CrudRepository<T> {
   }
 
   async create(values: QueryDeepPartialEntity<T>, entity: ObjectType<T>) {
-    const columnList = this.helpers.getEntityColumnNameList(entity);
-    return await this.dataSource
-      .createQueryBuilder()
-      .insert()
-      .into(entity)
-      .values(values)
-      .returning(columnList)
-      .execute();
+    const res = await this.dataSource.manager.insert(entity, values)
+    const id = res.identifiers[0].id
+    const result = await this.dataSource.manager.findOneBy(entity, id)
+    return result
   }
 
-  async read(
-    entity: ObjectType<T>,
-    condition: Object
-  ) {
+  async read(entity: ObjectType<T>, condition: Object) {
     const alias = this.helpers.buildIntoAlias(entity);
     const conditionStr = this.helpers.buildWhereConditionString(
       entity,
