@@ -13,9 +13,12 @@ export class UserRepository extends CrudRepository<User> {
   }
 
   async getUserBy(uniqueProperty: Object): Promise< void | ObjectLiteral> {
-    return await this.read(User, uniqueProperty);
+    return await this.readOneBy(User, uniqueProperty);
   }
-  async post(user: QueryDeepPartialEntity<User>) {
-    return await this.create(user, User)
+  async getUserWithAllProperties(uniqueProperty: Object) {
+    return await this.readOneIncludeAllProperties(User, uniqueProperty)
+  }
+  async insertUser(user: QueryDeepPartialEntity<User>) {
+    return await this.insert(user, User)
   }
 }
