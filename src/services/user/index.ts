@@ -36,7 +36,7 @@ export class UserService {
   }
 
   async checkCredentials(email: string, password: string ){
-    const user = await this.userRepository.getUserWithAllProperties({ email })
+    const user = await this.userRepository.getUserWithPassword({ email })
     if (!user) {
       throw new Error('error logging in')
     }
@@ -44,7 +44,7 @@ export class UserService {
   }
 
   async generateJwt(email){
-    const user = await this.userRepository.getUserWithAllProperties({ email })
+    const user = await this.userRepository.getUserWithPassword({ email })
     if (!user) {
       throw new Error('error logging in')
     }
