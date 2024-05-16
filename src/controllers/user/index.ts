@@ -26,9 +26,9 @@ export class UserController {
         const newUser = await this.userService.register(req.body)
         if (!newUser) {
             sendMessageResponse(res, 400, this.userErrorMap.failedRegistration)
-          }
-        const cleanUser = this.userService.removeSensitiveInfo(newUser.generatedMaps[0], ['password', 'email'])
-        sendDataResponse(res, 201, cleanUser)
+            return
+        }
+        sendDataResponse(res, 201, newUser)
     }
 
     public async login(req: Request, res: Response){
