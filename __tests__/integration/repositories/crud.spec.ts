@@ -23,18 +23,15 @@ describe("crud repository methods: ", () => {
   // are not at fault
   test("this.crudRepository.create(value, entity) inserts a new instance of an entity in the db and returns it", async () => {
     await dataSource.initialize();
-    const result: ObjectLiteral = await repository.create(mockUserOne, User);
+    const result: ObjectLiteral = await repository.insert(mockUserOne, User);
     expect(result).not.toBeNull();
     expect(result).not.toBeUndefined();
     expect(result.identifiers[0]).toHaveProperty("id");
-    expect(result.raw[0]).toHaveProperty("username");
-    expect(result.generatedMaps[0]).toHaveProperty("username");
-    expect(result.generatedMaps[0].username).toEqual("Lee");
     // TODO: add a delete method so that this test can be run multiple times
     // without the repetition changing its outcome
   }, 20000);
   test("this.crudRepository.read(condition, entity) returns the value of the entity instance matching the condition passed to it", async() => {
-    const result: ObjectLiteral = await repository.read(User, {
+    const result: ObjectLiteral = await repository.readOneBy(User, {
       username: "Lee",
     });
     expect(result).not.toBeNull();

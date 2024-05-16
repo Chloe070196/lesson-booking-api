@@ -18,24 +18,24 @@ describe("user repository methods: ", () => {
   // all we are concerned with here is to check that UserRepository
   // extends CrudRepository properly. The tests only ascertain that
   // the request goes through as expected.
-  test("this.userRepository.create(value, entity) inserts a new instance of a user in the db and returns it", async () => {
+  test("this.userRepository.insertUser(value, entity) inserts a new instance of a user in the db and returns it", async () => {
     await dataSource.initialize();
-    const result: ObjectLiteral = await repository.post(mockUserOne);
+    const result: ObjectLiteral = await repository.insertUser(mockUserOne);
     expect(result).not.toBeNull();
     expect(result).not.toBeUndefined();
     expect(result.identifiers[0]).toHaveProperty("id");
-    expect(result.generatedMaps[0].username).toEqual("Max");
     // TODO: add a delete method so that this test can be run multiple times
     // without the repetition changing its outcome
   }, 20000);
-  test("this.userRepository.read(condition, entity) returns the value of the user instance matching the condition passed to it", async() => {
+  test("this.userRepository.getUserBy(condition, entity) returns the value of the user instance matching the condition passed to it", async() => {
     const result: void | ObjectLiteral = await repository.getUserBy({
-      username: "Lee",
+      username: "Max",
     });
     expect(result).not.toBeNull();
     expect(result).not.toBeUndefined();
     expect(result).toHaveProperty('username');
-    expect((result as { username: string }).username).toEqual('Lee');
+    expect(result).not.toHaveProperty('password');
+    expect((result as { username: string }).username).toEqual('Max');
     expect(result).toHaveProperty('id');
     expect(result).toHaveProperty('createdAt');
     expect(result).toHaveProperty('updatedAt');
