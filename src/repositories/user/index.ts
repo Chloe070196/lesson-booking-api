@@ -15,9 +15,21 @@ export class UserRepository extends CrudRepository<User> {
   async getUserBy(uniqueProperty: Object): Promise< void | ObjectLiteral> {
     return await this.readOneBy(User, uniqueProperty);
   }
-  async getUserWithAllProperties(uniqueProperty: Object) {
-    return await this.readOneIncludeAllProperties(User, uniqueProperty)
+
+  async getUserWithPassword(condition: Object) {
+    const alias = this.helpers.buildIntoAlias(User);
+    const conditionStr = this.helpers.buildWhereConditionString(
+      User,
+      condition
+    );
+    return await this.dataSource
+      .getRepository(User.name)
+      .createQueryBuilder(alias)
+      .addSelect('user.password')
+      .where(conditionStr, condition)
+      .getOne();
   }
+
   async insertUser(user: QueryDeepPartialEntity<User>) {
     return await this.insert(user, User)
   }
