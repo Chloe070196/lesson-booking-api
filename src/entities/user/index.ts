@@ -16,7 +16,7 @@ export enum UserRole {
 export class User extends InstanceIdentification {
     @Column()
     username: string;
-    @Column({unique: true})
+    @Column({unique: true, select: false})
     email: string;
     @Column()
     password: string;
