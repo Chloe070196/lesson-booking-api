@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import { CrudRepositoryHelpers } from "../../helpers/typeorm-querybuilder";
-import { Teacher } from "../../entities/teacher";
+import { Teacher } from "../../entities/teacher/index.ts";
 import { CrudRepository } from "../crud-repository";
 
 export default class TeacherRepository extends CrudRepository<Teacher> {
