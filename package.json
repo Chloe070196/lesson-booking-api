@@ -54,6 +54,9 @@
       "transformIgnorePatterns": [
          "node_modules/(?!@babel/runtime)/"
       ],
+      "modulePathIgnorePatterns": [
+         "__tests__/utils.ts"
+      ],
       "transform": {
          "^.+\\.(ts)$": "ts-jest",
          "^.+\\.(js)$": "babel-jest",
