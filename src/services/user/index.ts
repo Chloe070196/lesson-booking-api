@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import { UserRepository } from "../../repositories/user/index.ts";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 import { User } from "../../entities/user/index.js";
-import { ObjectLiteral } from "typeorm";
 import jwt from "jsonwebtoken";
 
 
@@ -18,17 +17,6 @@ export class UserService {
     return await bcrypt.compare(string, hashedValue)
   }
   
-  private async getUserIncludePasswordBy(email: string) {
-    return await this.userRepository.getUserBy({ email });
-  }
-
-  removeSensitiveInfo(obj: ObjectLiteral, fieldNameList: Array<string>) {
-    fieldNameList.forEach((fieldName) => {
-      delete obj[fieldName];
-    });
-    return obj;
-  }
-
   async register(user: User) {
     user.password = await this.hash(user.password);
     const partialUser: QueryDeepPartialEntity<User> = {
@@ -36,7 +24,10 @@ export class UserService {
       username: user.username,
       password: user.password,
     };
-    return await this.userRepository.post(partialUser);
+    // TODO: add error handling for both requests
+    const response = await this.userRepository.insertUser(partialUser)
+    const identifier = response.identifiers[0]
+    return await this.userRepository.getUserBy(identifier);
   }
 
   async doesUserExist(email: string) {
@@ -45,7 +36,7 @@ export class UserService {
   }
 
   async checkCredentials(email: string, password: string ){
-    const user = await this.getUserIncludePasswordBy(email)
+    const user = await this.userRepository.getUserWithAllProperties({ email })
     if (!user) {
       throw new Error('error logging in')
     }
@@ -53,7 +44,7 @@ export class UserService {
   }
 
   async generateJwt(email){
-    const user = await this.getUserIncludePasswordBy(email)
+    const user = await this.userRepository.getUserWithAllProperties({ email })
     if (!user) {
       throw new Error('error logging in')
     }
