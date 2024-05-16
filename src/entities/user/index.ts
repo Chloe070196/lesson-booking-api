@@ -20,6 +20,9 @@ export class User extends InstanceIdentification {
     email: string;
     @Column({ select: false })
     password: string;
+    // TODO: ensure that this is impossible to update without admin permission
+    @Column({ default: "student" })
+    role: UserRole;
     @OneToOne(() => Student, { nullable: true })
     @JoinColumn()
     student: Student;
