@@ -1,5 +1,5 @@
 import { ObjectLiteral } from "typeorm";
-import { dataSource } from "../src/dataSource";
+import { dataSource } from "../src/dataSource.ts";
 import { app }  from "../src/server.ts"
 
 export default class TestUtils {
