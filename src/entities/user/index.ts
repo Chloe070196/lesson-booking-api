@@ -16,9 +16,9 @@ export enum UserRole {
 export class User extends InstanceIdentification {
     @Column()
     username: string;
-    @Column({unique: true, select: false})
+    @Column({ unique: true })
     email: string;
-    @Column()
+    @Column({ select: false })
     password: string;
     @OneToOne(() => Student, { nullable: true })
     @JoinColumn()
